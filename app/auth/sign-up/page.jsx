@@ -57,6 +57,7 @@ const App = () => {
       const finalMerchantData = {
         ...merchantData,
         admin: userRecord.id,
+        name: userRecord.name
       };
 
       await pb.collection('merchants').create(finalMerchantData);
