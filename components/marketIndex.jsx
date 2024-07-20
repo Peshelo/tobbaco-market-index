@@ -238,7 +238,7 @@ const MarketIndex = () => {
                 columns={columns}
                 expandable={{
                     expandedRowRender: (record) => (
-                        <p>{`Phone: ${record.phoneNumber}`}</p>
+                        <p>{`Phone: ${record.name} Phone: ${record.phoneNumber}`}</p>
                     ),
                     rowExpandable: (record) => record.id,
                 }}
