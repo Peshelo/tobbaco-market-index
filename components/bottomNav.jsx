@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
-import { HiChartBar, HiHome, HiMiniCog6Tooth } from 'react-icons/hi2';
+import { HiCalculator, HiChartBar, HiHome, HiMiniCog6Tooth } from 'react-icons/hi2';
 
 const BottomNav = () => {
     const pathname = usePathname().toString();
@@ -20,9 +20,9 @@ const BottomNav = () => {
                     <HiChartBar size={25} />
                     <label className="text-sm text-gray-700">Market</label>
             </Link>
-            <Link href={'/settings'} className={pathname === '/settings' ? activeLinkStyle : linkStyle}>
-                    <HiMiniCog6Tooth size={25} />
-                    <label className="text-sm text-gray-700">Settings</label>
+            <Link href={'/market/calculator'} className={pathname === '/market/calculator' ? activeLinkStyle : linkStyle}>
+                    <HiCalculator size={25} />
+                    <label className="text-sm text-gray-700">Calculator</label>
             </Link>
         </div>
     );

@@ -41,7 +41,7 @@ export default function Home() {
 <div className="w-full flex flex-col justify-center items-center p-2 relative space-y-4 text-center">
 <h1 className="text-white text-4xl font-bold">WELCOME TO TOBBACO FLOOR BOOKING</h1>
 <p className="text-white text-lg">The best place to get the latest market prices for tobbaco and book</p>
-<Link href={'/market'} className="bg-lime-500 rounded-md p-2 text-gray-700">Book A Day</Link>
+<Link href={'/market'} className="bg-lime-500 rounded p-2 text-gray-700">Book A Day</Link>
 
 
 </div>

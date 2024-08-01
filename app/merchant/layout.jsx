@@ -12,14 +12,11 @@ const links = [
   { href: '/merchant', label: 'Dashboard', icon: HiMiniSquares2X2 },
   { href: '/merchant/market-index', label: 'Market Index', icon: HiChartBar },
   { href: '/merchant/bookings', label: 'Bookings', icon: HiCalendar },
-
   { href: '/merchant/profile', label: 'Profile', icon: HiUser },
-  { href: '/merchant/settings', label: 'Settings', icon: HiAdjustmentsVertical }
+  // { href: '/merchant/settings', label: 'Settings', icon: HiAdjustmentsVertical }
 ];
 
-export default function DashboardLayout({
-  children, // will be a page or nested layout
-}) {
+export default function DashboardLayout({ children }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const router = useRouter();
@@ -47,24 +44,24 @@ export default function DashboardLayout({
 
   return (
     <section className="w-screen h-screen overflow-hidden flex flex-row">
-      <div className="flex overflow-hidden flex-col text-green-700 bg-white gap-y-4 pb-4 border-l">
+      <div className="flex flex-col text-green-700 bg-green-700 text-white gap-y-4 pb-4 border-l w-[250px] max-sm:w-[70px]">
         <div className="max-sm:hidden">
-          <Link href={'/super_admin'} className=" p-6 border-b text-black w-full flex flex-col items-center gap-y-2 justify-center">
-          <img src="http://127.0.0.1:8090/api/files/qui7984249fqr07/ylpbrmotu2lengo/360_f_575309486_ob377wpcqw_ycd1sq_ljds562jvP.png" alt="logo" className=" size-20 rounded-xl" />
-            <label className="text-sm text-gray-500">{email}</label>
+          <Link href={'/super_admin'} className="p-6 border-b text-white w-full flex flex-col items-center gap-y-2 justify-center">
+            <img src="/assets/images/logo.png" alt="logo" className="size-20 rounded-xl" />
+            <label className="text-sm text-gray-300">{email}</label>
           </Link>
         </div>
 
-        <div className="w-[350px]">
+        <div className="flex-grow">
           {links.map((link) => (
-            <Link key={link.href} href={link.href} className={`p-4  w-full flex flex-row items-center justify-start duration-150 ${pathname === link.href ? ' border-green-700 border-l-4  text-gray-700' : 'hover:bg-white hover:text-green-900'}`}>
-              <link.icon size={20} />
+            <Link key={link.href} href={link.href} className={`p-4 w-full flex flex-row items-center justify-start duration-150 ${pathname === link.href ? 'bg-green-900' : 'hover:bg-green-800'}`}>
+              <link.icon size={20} className="text-white" />
               <p className="max-sm:hidden mx-2">{link.label}</p>
             </Link>
           ))}
         </div>
 
-        <Button size="large" className="w-full  flex flex-row justify-start items-center" onClick={() => logout()}>
+        <Button size="large" className="w-full flex flex-row justify-start items-center mt-auto border-none hover:bg-red-700 bg-transparent text-white" onClick={logout}>
           <IoLogOut size={20} />
           <p className="max-sm:hidden mx-2" variant="secondary">Logout</p>
         </Button>
@@ -76,7 +73,7 @@ export default function DashboardLayout({
             <div>{pathname.replace('/merchant/', '').toUpperCase().replace('/','') || 'DASHBOARD'} DASHBOARD</div>
             <div className="flex flex-row items-center gap-x-2">
               <div className="px-2 rounded-none max-sm:justify-center flex flex-row gap-x-2 items-center">
-                <Avatar  name={username} />
+                <Avatar name={username} />
                 <div className="max-sm:hidden flex flex-col">
                   <h2 className="text-md text-gray-500">{username}</h2>
                   <p className="text-xs text-gray-400">{email}</p>

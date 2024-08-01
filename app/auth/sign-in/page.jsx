@@ -69,7 +69,7 @@ export default function Page() {
             <div className="flex flex-col h-full w-full justify-center items-center p-10 max-md:p-2">
                 <form className="w-full flex flex-col gap-y-2 items-center">
                     <Link href="/" className="p-2 text-xl font-bold rounded-sm flex flex-col items-center gap-y-2">
-                         <Image className="rounded" alt='logo' src={'/assets/images/logo.png'} width={50} height={50} loading="lazy"/>
+                         <Image className="rounded" alt='logo' src={'/assets/images/logo.png'} width={60} height={60} loading="lazy"/>
                          <label className="text-sm text-gray-400">Tobbaco Market Index</label>
                     </Link>
                     <h1 className="w-full text-center text-xl font-semibold my-2">Sign In</h1>

@@ -70,6 +70,8 @@ const Market = () => {
             <p>PhoneNumber: {myBooking.phoneNumber}</p>
             <p>Email: {myBooking.email}</p>
             {/* <Divider>Booking</Divider> */}
+            <p>Queue Number: {myBooking.lineNumber == 0 ? 'No line number' : myBooking.lineNumber}</p>
+
             <p>Status: <Tag color='blue'>{myBooking.status}</Tag></p>
             <p>Date: {myBooking.date}</p>
             <Button onClick={()=>cancelBooking(referenceId)} type='primary' className='bg-red-600' block>I want to cancel my booking</Button>

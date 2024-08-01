@@ -159,7 +159,7 @@ const App = () => {
   return (
     <div className='bg-white p-4 flex flex-col justify-center'>
       <Link href="/" className="p-2 text-xl font-bold rounded-sm flex flex-col items-center gap-y-2">
-        <Image className="rounded" alt='logo' src={'/assets/images/logo.png'} width={50} height={50} loading="lazy"/>
+        <Image className="rounded" alt='logo' src={'/assets/images/logo.png'} width={60} height={60} loading="lazy"/>
         <label className="text-sm text-gray-400">Tobacco Market Index</label>
       </Link>
       <h1 className='w-full my-2 font-semibold text-center'>MERCHANT ONBOARDING</h1>

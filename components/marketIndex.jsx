@@ -64,6 +64,7 @@ const MarketIndex = () => {
                 "phoneNumber": values.phoneNumber,
                 "date": values.date.toISOString(),
                 "status": "PENDING",
+                "lineNumber":0,
                 "message": "Booking request",
                 "email": values?.email,
                 "nationalId": values?.nationalId // You may want to replace this with a dynamic value or add a new input for the message
