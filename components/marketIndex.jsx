@@ -215,7 +215,7 @@ const MarketIndex = () => {
                         label="Date"
                         rules={[{ required: true, message: 'Please select date' }]}
                     >
-                        <DatePicker className='w-full' showTime />
+                        <DatePicker className='w-full' />
                     </Form.Item>
                         </Col>
                         <Col span={12}>
