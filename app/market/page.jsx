@@ -7,6 +7,7 @@ import { Button, Col, Divider, Input, Modal, Row, Tag } from 'antd';
 import { HiTrendingUp, HiCalendar, HiBell, HiChartPie, HiSupport, HiChartBar } from 'react-icons/hi';
 import { toast } from 'react-toastify';
 import pb from '@/lib/connection';
+import dayjs from 'dayjs';
 
 const Market = () => {
     const [referenceId,setReferenceId] = useState();
@@ -51,6 +52,7 @@ const Market = () => {
                 "status": "CANCELLED",
                 "message": "Customer has cancelled case",
                 "email": record?.email,
+                "lineNumber": 0,
             "nationalId": record?.nationalId
             };
             const response = await pb.collection('bookings').update(record.id, data);
@@ -60,6 +62,12 @@ const Market = () => {
                 toast.error(e.message)
         }
     }
+    const calculateTimeSlot = (lineNumber) => {
+        if (lineNumber === 0) return '---';
+        const baseTime = dayjs().set('hour', 8).set('minute', 0).set('second', 0); // 8:00 AM
+        const timeSlot = baseTime.add((lineNumber - 1) * 30, 'minute');
+        return timeSlot.format('HH:mm A');
+    };
     return (
         <div className="bg-gray-100 min-h-screen">
             <TopNav />
@@ -73,7 +81,8 @@ const Market = () => {
             <p>Queue Number: {myBooking.lineNumber == 0 ? 'No line number' : myBooking.lineNumber}</p>
 
             <p>Status: <Tag color='blue'>{myBooking.status}</Tag></p>
-            <p>Date: {myBooking.date}</p>
+            <p>Date: {myBooking.date.split(" ")[0]}</p>
+            <p>Time: {calculateTimeSlot(myBooking.lineNumber)}</p>
             <Button onClick={()=>cancelBooking(referenceId)} type='primary' className='bg-red-600' block>I want to cancel my booking</Button>
             </div>
             </Modal>

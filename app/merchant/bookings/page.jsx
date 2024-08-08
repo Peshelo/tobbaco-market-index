@@ -116,6 +116,12 @@ const Page = () => {
                 return 'blue';
         }
     };
+    const calculateTimeSlot = (lineNumber) => {
+        if (lineNumber === 0) return '---';
+        const baseTime = dayjs().set('hour', 8).set('minute', 0).set('second', 0); // 8:00 AM
+        const timeSlot = baseTime.add((lineNumber - 1) * 30, 'minute');
+        return timeSlot.format('HH:mm A');
+    };
 
     const columns = [
         {
@@ -175,6 +181,13 @@ const Page = () => {
             key: 'date',
             render: (text) => <Tag color='green'>{text.slice(0, 10)}</Tag>,
             sorter: (a, b) => new Date(a.date) - new Date(b.date),
+        },
+        {
+            title: 'Time Slot',
+            dataIndex: 'lineNumber',
+            key: 'timeSlot',
+            render: (lineNumber) => <label>{calculateTimeSlot(lineNumber)}</label>,
+            sorter: (a, b) => a.lineNumber - b.lineNumber,
         },
         {
             title: 'Actions',
@@ -240,12 +253,12 @@ const Page = () => {
                 loading={loading}
                 dataSource={bookings}
                 columns={columns}
-                expandable={{
-                    expandedRowRender: (record) => (
-                        <p>{`Message: ${record.message}`}</p>
-                    ),
-                    rowExpandable: (record) => record.id,
-                }}
+                // expandable={{
+                //     expandedRowRender: (record) => (
+                //         <p>{`Message: ${record.message}`}</p>
+                //     ),
+                //     rowExpandable: (record) => record.id,
+                // }}
                 scroll={{ x: 'max-content' }}
             />
         </div>
