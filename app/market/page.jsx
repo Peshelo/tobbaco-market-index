@@ -81,7 +81,7 @@ const Market = () => {
             <p>Queue Number: {myBooking.lineNumber == 0 ? 'No line number' : myBooking.lineNumber}</p>
 
             <p>Status: <Tag color='blue'>{myBooking.status}</Tag></p>
-            <p>Date: {myBooking.date.split(" ")[0]}</p>
+            <p>Date: {myBooking?.date?.split(" ")[0]}</p>
             <p>Time: {calculateTimeSlot(myBooking.lineNumber)}</p>
             <Button onClick={()=>cancelBooking(referenceId)} type='primary' className='bg-red-600' block>I want to cancel my booking</Button>
             </div>
