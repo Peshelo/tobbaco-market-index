@@ -56,7 +56,7 @@ const Page = () => {
         <div>
             <h1 className='my-2 text-2xl'>Statistics</h1>
             {data && (
-                <div className="w-full grid grid-cols-3 gap-2">
+                <div className="w-full grid grid-cols-3 max-md:grid-cols-1 gap-2">
                     <StatsCard value_USD={data.grade_A_USD} value_ZWL={data.grade_A_ZWL} grade={'A'} suffix={'USD'} />
                     <StatsCard value_USD={data.grade_B_USD} value_ZWL={data.grade_B_ZWL} grade={'B'} suffix={'USD'} />
                     <StatsCard value_USD={data.grade_C_USD} value_ZWL={data.grade_C_ZWL} grade={'C'} suffix={'USD'} />
