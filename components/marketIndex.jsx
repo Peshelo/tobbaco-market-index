@@ -204,7 +204,7 @@ const MarketIndex = () => {
                                 label="Phone Number"
                                 rules={[{ required: true, message: 'Please enter phone number' }]}
                             >
-                                <Input addonBefore="+264" placeholder="Phone Number" />
+                                <Input addonBefore="+263" placeholder="Phone Number" />
                             </Form.Item>
                         </Col>
                     </Row>
