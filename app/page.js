@@ -35,8 +35,8 @@ export default function Home() {
       <TopNav/>
 
           {/* Main Content */}
-          <div className="relative w-full h-[500px] flex flex-col justify-center items-center bg-no-repeat bg-cover"         style={{ backgroundImage: 'url(/assets/images/background.jpg)' }}>
-          <div className="absolute inset-0 bg-gradient-to-t from-green-700 to-green-600 opacity-20"></div>
+          <div className="relative w-full h-[500px] flex flex-col justify-center items-center bg-no-repeat bg-cover" style={{ backgroundImage: 'url(/assets/images/bg.jpg)' }}>
+          <div className="absolute inset-0 bg-gradient-to-t from-black to-green-600 opacity-40"></div>
 
 <div className="w-full flex flex-col justify-center items-center p-2 relative space-y-4 text-center">
 <h1 className="text-white text-4xl font-bold">WELCOME TO TOBBACO FLOOR BOOKING</h1>

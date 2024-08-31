@@ -16,8 +16,8 @@ const TopNav = () => {
         <ul className="flex flex-row gap-x-2 items-center">
             </ul>
             <ul className="flex flex-row gap-x-2 items-center">
-              <li><Link href={'/auth/sign-in'}>Login</Link></li>
-              <li><Link href={'/auth/sign-up'} className="bg-green-700 p-2 rounded-md text-white">Sign Up</Link></li>
+              {/* <li><Link href={'/auth/sign-in'}>Login</Link></li> */}
+              <li><Link href={'/auth/sign-in'} className="bg-green-700 p-2 rounded-md text-white">Login</Link></li>
             </ul>
           </div>
         

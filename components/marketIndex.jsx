@@ -88,6 +88,12 @@ const MarketIndex = () => {
             render: (text) => <Tag color='volcano'>{text}</Tag>,
         },
         {
+            title: 'City',
+            dataIndex: 'city',
+            key: 'city',
+            sorter: (a, b) => a.name.localeCompare(b.name),
+        },
+        {
             title: 'Grade A (USD)',
             dataIndex: 'grade_A_USD',
             key: 'grade_A_USD',
@@ -204,7 +210,7 @@ const MarketIndex = () => {
                                 label="Phone Number"
                                 rules={[{ required: true, message: 'Please enter phone number' }]}
                             >
-                                <Input addonBefore="+264" placeholder="Phone Number" />
+                                <Input placeholder="Phone Number" />
                             </Form.Item>
                         </Col>
                     </Row>
@@ -239,7 +245,7 @@ const MarketIndex = () => {
                 columns={columns}
                 expandable={{
                     expandedRowRender: (record) => (
-                        <p>{`Company name: ${record.name} Phone: ${record.phoneNumber}`}</p>
+                        <p>{`City: ${record.city} | Address: ${record.address} | Phone: ${record.phoneNumber}`}</p>
                     ),
                     rowExpandable: (record) => record.id,
                 }}

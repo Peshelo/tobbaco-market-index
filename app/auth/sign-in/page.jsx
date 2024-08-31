@@ -39,9 +39,10 @@ export default function Page() {
             toast.success("User Login succesful")
             let userRole = authData.record.role
             if(userRole == "SUPER_ADMIN"){
-                router.push('/super_admin')
+                router.push('/admin')
             }else if(userRole == "MERCHANT"){
                 router.push('/merchant')
+                
             }else{
                 throw Error("Failed to login")
             }
@@ -79,7 +80,7 @@ export default function Page() {
                     <Button className="bg-lime-700" block size="large" onClick={register} type="primary">Login</Button>
                     <p className="my-2 text-sm text-gray-500 w-full text-center"><Link className="text-gray-600 underline underline-offset-1" href={'/auth/forgot-password'}>Forgot password?</Link></p>
                 </form>
-                <label className='w-full text-center mt-4 p-2 text-gray-600'>Do not have an account? <Link href={'/auth/sign-up'} className='text-green-600'>Sign up</Link></label>
+                {/* <label className='w-full text-center mt-4 p-2 text-gray-600'>Do not have an account? <Link href={'/auth/sign-up'} className='text-green-600'>Sign up</Link></label> */}
 
             </div>
 
