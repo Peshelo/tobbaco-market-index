@@ -145,6 +145,7 @@ const MerchantsPage = () => {
 
     return (
         <div className="p-4">
+            <h1 className="text-2xl font-bold mb-4">Merchants</h1>
             <div className="flex justify-between items-center mb-4">
                 <Input
                     placeholder="Search merchants"
@@ -152,9 +153,11 @@ const MerchantsPage = () => {
                     onChange={handleSearch}
                     className="w-1/3"
                 />
-                <Button type="primary" icon={<PlusOutlined />} onClick={() => showDrawer(false)}>
+                <Link href="/admin/merchants/add-new">
+                <Button type="primary" icon={<PlusOutlined />}>
                     Add Merchant
                 </Button>
+                </Link>
             </div>
 
             {loading ? (
