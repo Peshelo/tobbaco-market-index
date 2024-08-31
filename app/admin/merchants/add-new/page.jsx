@@ -75,12 +75,13 @@ const Page = () => {
     };
 
     return (
-        <div className='p-4'>
+        <div className='bg-white p-4 border border-gray-300 rounded shadow-md'>
+            <h1 className='text-2xl font-semibold mb-4'>Add New Merchant</h1>
             <Form
                 form={form}
                 layout="vertical"
                 onFinish={onFinish}
-                className='bg-white p-4 border border-gray-300 rounded shadow-md'
+                className=''
             >
                 <Row gutter={16}>
                     <Col span={12}>
