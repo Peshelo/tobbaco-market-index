@@ -12,20 +12,24 @@ const Page = () => {
     const [searchId, setSearchId] = useState('');
     const [searchNationalId, setSearchNationalId] = useState('');
 
-    const fetchBookings = async (filters = {}) => {
+    const fetchBookings = async () => {
         setLoading(true);
         try {
             const filterConditions = [];
-            if (filters.date) {
-                filterConditions.push(`date="${filters.date}"`);
+            if (searchDate) {
+                const startOfDay = dayjs(searchDate).startOf('day').format('YYYY-MM-DD 00:00:00.000[Z]');
+                const endOfDay = dayjs(searchDate).endOf('day').format('YYYY-MM-DD 23:59:59.999[Z]');
+                filterConditions.push(`"${startOfDay}" <= date && date <= "${endOfDay}"`);
+                // filterConditions.push(`date="${dayjs(searchDate).format('YYYY-MM-DD')}"`);
             }
-            if (filters.id) {
-                filterConditions.push(`id="${filters.id}"`);
+            if (searchId) {
+                filterConditions.push(`id="${searchId}"`);
             }
-            if (filters.nationalId) {
-                filterConditions.push(`nationalId="${filters.nationalId}"`);
+            if (searchNationalId) {
+                filterConditions.push(`nationalId="${searchNationalId}"`);
             }
             const filterString = filterConditions.length ? filterConditions.join(' && ') : null;
+
             const records = await pb.collection('bookings').getFullList({
                 filter: filterString,
                 sort: '-created',
@@ -38,21 +42,11 @@ const Page = () => {
         }
     };
 
-    const fetchBookingsByDate = async (date) => {
-        try {
-            const records = await pb.collection('bookings').getFullList({
-                filter: `date="${date}"`,
-                sort: 'created',
-            });
-            return records;
-        } catch (e) {
-            console.log("Failed to fetch by date", e.message);
-            return [];
-        }
-    };
-
     const updateLineNumbers = async (date) => {
-        const records = await fetchBookingsByDate(date);
+        const records = await pb.collection('bookings').getFullList({
+            filter: `date="${date}"`,
+            sort: 'created',
+        });
         const filteredRecords = records.filter(r => r.lineNumber > 0);
         for (let i = 0; i < filteredRecords.length; i++) {
             const record = filteredRecords[i];
@@ -75,12 +69,15 @@ const Page = () => {
             };
 
             if (status === "BOOKED") {
-                const recordsByDate = await fetchBookingsByDate(record.date);
+                const recordsByDate = await pb.collection('bookings').getFullList({
+                    filter: `date="${record.date}"`,
+                    sort: 'created',
+                });
                 const filteredRecords = recordsByDate.filter(r => r.lineNumber > 0);
                 data.lineNumber = filteredRecords.length + 1;
             }
 
-            const response = await pb.collection('bookings').update(record.id, data);
+            await pb.collection('bookings').update(record.id, data);
             toast.success('Record has been ' + status.toLowerCase());
 
             if (status === "REJECTED" && record.lineNumber > 0) {
@@ -90,20 +87,12 @@ const Page = () => {
         } catch (e) {
             toast.error(e.message);
         } finally {
-            fetchBookings({
-                date: searchDate ? dayjs(searchDate).format('YYYY-MM-DD') : null,
-                id: searchId,
-                nationalId: searchNationalId,
-            });
+            fetchBookings(); // Re-fetch bookings after update
         }
     };
 
     const handleSearch = () => {
-        fetchBookings({
-            date: searchDate ? dayjs(searchDate).format('YYYY-MM-DD') : null,
-            id: searchId,
-            nationalId: searchNationalId,
-        });
+        fetchBookings();
     };
 
     const getStatusColor = (status) => {
@@ -116,6 +105,7 @@ const Page = () => {
                 return 'blue';
         }
     };
+
     const calculateTimeSlot = (lineNumber) => {
         if (lineNumber === 0) return '---';
         const baseTime = dayjs().set('hour', 8).set('minute', 0).set('second', 0); // 8:00 AM
@@ -166,7 +156,7 @@ const Page = () => {
             dataIndex: 'lineNumber',
             key: 'lineNumber',
             sorter: (a, b) => a.lineNumber - b.lineNumber,
-            render: (text)=><labe>{text == 0 ? '---' : text}</labe>
+            render: (text) => <label>{text === 0 ? '---' : text}</label>
         },
         {
             title: 'Status',
@@ -253,12 +243,6 @@ const Page = () => {
                 loading={loading}
                 dataSource={bookings}
                 columns={columns}
-                // expandable={{
-                //     expandedRowRender: (record) => (
-                //         <p>{`Message: ${record.message}`}</p>
-                //     ),
-                //     rowExpandable: (record) => record.id,
-                // }}
                 scroll={{ x: 'max-content' }}
             />
         </div>
